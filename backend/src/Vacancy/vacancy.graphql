@@ -1,0 +1,12 @@
+type Vacancy {
+  id: ID
+  position: String
+  address: Address
+  salary: Salary
+  description: String
+}
+
+type Query {
+  vacancy(id: ID!): Vacancy
+  vacancies: [Vacancy]!
+}

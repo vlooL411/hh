@@ -1,0 +1,27 @@
+fragment SalaryInfo on Salary {
+  to
+  from
+  currency
+  gross
+}
+
+fragment MetroStationInfo on MetroStation {
+  station_name
+  line_name
+  station_id
+  line_id
+  lat
+  lng
+}
+
+fragment AddressInfo on Address {
+  city
+  street
+  building
+  description
+  lat
+  lng
+  metro_stations {
+    ...MetroStationInfo
+  }
+}

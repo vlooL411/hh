@@ -1,0 +1,10 @@
+fragment VacancyInfo on Vacancy {
+  position
+  address {
+    ...AddressInfo
+  }
+  salary {
+    ...SalaryInfo
+  }
+  description
+}

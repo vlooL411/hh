@@ -1,0 +1,13 @@
+query Vacancy($id: ID!) {
+  vacancy(id: $id) {
+    id
+    ...VacancyInfo
+  }
+}
+
+query Vacancies {
+  vacancies {
+    id
+    ...VacancyInfo
+  }
+}

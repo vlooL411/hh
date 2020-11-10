@@ -1,0 +1,25 @@
+type Salary {
+  to: String
+  from: String
+  currency: String
+  gross: Boolean
+}
+
+type MetroStation {
+  station_name: String
+  line_name: String
+  station_id: String
+  line_id: String
+  lat: Float
+  lng: Float
+}
+
+type Address {
+  city: String
+  street: String
+  building: String
+  description: String
+  lat: Float
+  lng: Float
+  metro_stations: [MetroStation]
+}
