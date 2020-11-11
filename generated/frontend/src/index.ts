@@ -11,6 +11,24 @@ export type Scalars = {
   Float: number;
 };
 
+export type Query = {
+  __typename?: 'Query';
+  login?: Maybe<UserSafe>;
+  vacancy?: Maybe<Vacancy>;
+  vacancies: Array<Maybe<Vacancy>>;
+};
+
+
+export type QueryLoginArgs = {
+  username: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type QueryVacancyArgs = {
+  id: Scalars['ID'];
+};
+
 export type Salary = {
   __typename?: 'Salary';
   to?: Maybe<Scalars['String']>;
@@ -40,6 +58,24 @@ export type Address = {
   metro_stations?: Maybe<Array<Maybe<MetroStation>>>;
 };
 
+export type IUser = {
+  userId: Scalars['ID'];
+  username: Scalars['String'];
+};
+
+export type UserSafe = IUser & {
+  __typename?: 'UserSafe';
+  userId: Scalars['ID'];
+  username: Scalars['String'];
+};
+
+export type User = IUser & {
+  __typename?: 'User';
+  userId: Scalars['ID'];
+  username: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Vacancy = {
   __typename?: 'Vacancy';
   id?: Maybe<Scalars['ID']>;
@@ -49,16 +85,19 @@ export type Vacancy = {
   description?: Maybe<Scalars['String']>;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  vacancy?: Maybe<Vacancy>;
-  vacancies: Array<Maybe<Vacancy>>;
-};
+export type LoginQueryVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
 
 
-export type QueryVacancyArgs = {
-  id: Scalars['ID'];
-};
+export type LoginQuery = (
+  { __typename?: 'Query' }
+  & { login?: Maybe<(
+    { __typename?: 'UserSafe' }
+    & Pick<UserSafe, 'userId' | 'username'>
+  )> }
+);
 
 export type VacancyInfoFragment = (
   { __typename?: 'Vacancy' }
@@ -161,6 +200,41 @@ export const VacancyInfoFragmentDoc = gql`
 }
     ${AddressInfoFragmentDoc}
 ${SalaryInfoFragmentDoc}`;
+export const LoginDocument = gql`
+    query Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    userId
+    username
+  }
+}
+    `;
+
+/**
+ * __useLoginQuery__
+ *
+ * To run a query within a React component, call `useLoginQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoginQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoginQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginQuery(baseOptions: Apollo.QueryHookOptions<LoginQuery, LoginQueryVariables>) {
+        return Apollo.useQuery<LoginQuery, LoginQueryVariables>(LoginDocument, baseOptions);
+      }
+export function useLoginLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LoginQuery, LoginQueryVariables>) {
+          return Apollo.useLazyQuery<LoginQuery, LoginQueryVariables>(LoginDocument, baseOptions);
+        }
+export type LoginQueryHookResult = ReturnType<typeof useLoginQuery>;
+export type LoginLazyQueryHookResult = ReturnType<typeof useLoginLazyQuery>;
+export type LoginQueryResult = Apollo.QueryResult<LoginQuery, LoginQueryVariables>;
 export const VacancyDocument = gql`
     query Vacancy($id: ID!) {
   vacancy(id: $id) {

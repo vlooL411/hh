@@ -6,6 +6,17 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export interface IUser {
+    userId: string;
+    username: string;
+}
+
+export interface IQuery {
+    login(username: string, password: string): UserSafe | Promise<UserSafe>;
+    vacancy(id: string): Vacancy | Promise<Vacancy>;
+    vacancies(): Vacancy[] | Promise<Vacancy[]>;
+}
+
 export interface Salary {
     to?: string;
     from?: string;
@@ -32,15 +43,21 @@ export interface Address {
     metro_stations?: MetroStation[];
 }
 
+export interface UserSafe extends IUser {
+    userId: string;
+    username: string;
+}
+
+export interface User extends IUser {
+    userId: string;
+    username: string;
+    password: string;
+}
+
 export interface Vacancy {
     id?: string;
     position?: string;
     address?: Address;
     salary?: Salary;
     description?: string;
-}
-
-export interface IQuery {
-    vacancy(id: string): Vacancy | Promise<Vacancy>;
-    vacancies(): Vacancy[] | Promise<Vacancy[]>;
 }

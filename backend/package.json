@@ -5,22 +5,32 @@
   "scripts": {
     "dev": "nest start -w",
     "build": "nest build",
-    "start": "nest start"
+    "start": "nest start",
+    "jest": "jest",
+    "jest:watch": "jest -w"
   },
   "dependencies": {
-    "@nestjs/cli": "^7.5.2",
     "@nestjs/core": "^7.5.1",
     "@nestjs/common": "^7.5.1",
     "@nestjs/graphql": "^7.8.1",
     "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/passport": "^7.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.3",
     "graphql-tools": "^7.0.1",
-    "graphql": "^15.4.0",
     "apollo-server-express": "^2.19.0",
     "@common/utils": "^0.1.1"
   },
   "devDependencies": {
+    "@nestjs/cli": "^7.5.2",
+    "@nestjs/testing": "^7.5.1",
+    "@types/passport-local": "^1.0.33",
+    "@types/jest": "26.0.15",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "supertest": "^6.0.1",
     "typescript": "file:../typescript",
     "@types/node": "file:../@types/node"
   }

@@ -1,0 +1,7 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testRegex": ".test.ts$",
+  "roots": ["<rootDir>/test/"],
+  "moduleDirectories": ["node_modules", "./", "src"]
+}

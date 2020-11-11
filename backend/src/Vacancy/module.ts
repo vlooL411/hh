@@ -5,10 +5,7 @@ import VacancyResolver from './resolver';
 
 @Module({
     imports: [HttpModule],
-    providers: [
-        VacancyService,
-        VacancyResolver
-    ],
+    providers: [VacancyService, VacancyResolver],
     exports: [VacancyService],
 })
 export default class LaunchModule { }

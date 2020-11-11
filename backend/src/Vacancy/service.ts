@@ -1,6 +1,6 @@
 import { HttpService, Injectable } from '@nestjs/common'
 import { Observable } from 'rxjs'
-import { map, first } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { Vacancy } from 'src/graphql'
 
 import { Model } from './model'
@@ -23,6 +23,7 @@ export default class VacancyService {
             address
         };
     }
+
     getAllVacancies = (): Observable<Vacancy[]> => {
         return this.http.
             get(`${this.apiUrl}vacancies`).
