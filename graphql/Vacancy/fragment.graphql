@@ -1,10 +1,25 @@
 fragment VacancyInfo on Vacancy {
-  position
-  address {
-    ...AddressInfo
+  id
+  name
+  area {
+    ...AreaInfo
   }
   salary {
     ...SalaryInfo
   }
+  employer {
+    ...EmployerInfo
+  }
+}
+
+fragment VacancyInfoDescription on Vacancy {
+  ...VacancyInfo
   description
+}
+
+fragment VacancyInfoSnippet on Vacancy {
+  ...VacancyInfo
+  snippet {
+    ...SnippetInfo
+  }
 }

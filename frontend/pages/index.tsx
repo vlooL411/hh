@@ -1,18 +1,12 @@
-import { ReactElement } from 'react'
-import { useLoginQuery, useVacanciesQuery, useVacancyQuery } from '@generated/frontend'
+import { useRouter } from "next/router"
+import { ReactElement, useEffect } from "react"
 
-const Index = (): ReactElement => {
-  const { data: dataVs } = useVacanciesQuery()
-  const { data: dataV } = useVacancyQuery({ variables: { id: '4095490' } })
-  const { data: dataAuth } = useLoginQuery({ variables: { username: 'admin', password: 'admin' } })
-
-  console.log('vacancies', dataVs?.vacancies)
-  console.log('vacancy', dataV?.vacancy)
-  console.log('auth', dataAuth?.login)
-
-  return <div className='index'>
-
-  </div>
+const index = (): ReactElement => {
+    const router = useRouter()
+    useEffect(() => {
+        router.push('./vacancies/0')
+    })
+    return null
 }
 
-export default Index
+export default index

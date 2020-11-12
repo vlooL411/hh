@@ -1,7 +1,17 @@
 export namespace Model {
+    export type Vacancies = {
+        per_page: number
+        page: number
+        pages: number
+        found: number
+        clusters: any
+        Items: Vacancy[]
+    }
+
     export type Vacancy = {
         id: string;
         description: string;
+        snippet: Snippet
         branded_description: string;
         key_skills: KeySkill[];
         schedule: BillingType;
@@ -36,6 +46,11 @@ export namespace Model {
         billing_type: BillingType;
         driver_license_types: DriverLicenseType[];
         accept_incomplete_resumes: boolean;
+    }
+
+    export type Snippet = {
+        requirement: string
+        responsibility: string
     }
 
     export type Address = {

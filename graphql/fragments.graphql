@@ -5,6 +5,34 @@ fragment SalaryInfo on Salary {
   gross
 }
 
+fragment SnippetInfo on Snippet {
+  requirement
+  responsibility
+}
+
+fragment AreaInfo on Area {
+  id
+  url
+  name
+}
+
+fragment LogoUrlsInfo on LogoUrls {
+  min
+  normal
+  original
+}
+
+fragment EmployerInfo on Employer {
+  id
+  name
+  url
+  logo_urls {
+    ...LogoUrlsInfo
+  }
+  alternate_url
+  trusted
+}
+
 fragment MetroStationInfo on MetroStation {
   station_name
   line_name

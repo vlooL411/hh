@@ -1,0 +1,22 @@
+$first: #dfdfdf
+$second:  #726e6e
+
+@function gradient($first, $second, $deg)
+    @return linear-gradient($deg, $first, $second 50%, $first)
+
+.loadertext
+    width: 100px
+    height: 1em
+    border-radius: .3em
+    background: gradient($first, $second, 135deg)
+    background-size: 400% 100%
+    animation: gradient 8s ease-out infinite
+@keyframes gradient
+    0%
+        background-position-x: 0%
+        background-color: gradient($first, $second, 135deg)
+    50%
+        background-position-x: 100%
+        background-color: gradient($first, $second, -45deg)
+    100%
+        background-position-x: 0%

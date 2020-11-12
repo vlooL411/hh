@@ -1,0 +1,27 @@
+$titleColor: #000
+$employerColor: #09f
+$areaColor: #09f
+
+.vacancy
+    max-width: 900px
+    margin: 0 3em
+    padding-bottom: 4em
+    &_logo
+        max-width: 150px
+        max-height: 150px
+        margin: 2em 0
+    &_title
+        
+        color: $titleColor
+        font-size: 1.5em
+    &_salary
+        font-size: 1.1em
+        margin: .4em 0
+    &_employer
+        color: $employerColor
+        font-size: 1.4em
+        margin: .75em 0 .3em
+    &_area
+        margin-bottom: 1em
+    @media screen and ( max-width: 500px )
+        margin: 0 2em

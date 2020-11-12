@@ -1,0 +1,29 @@
+$back: #222
+$color: #fff
+
+.header
+    padding: .5em 1em
+    display: grid
+    grid-template-columns: 50px minmax(100px, 1fr) 1fr
+    align-items: center
+    min-height: 70px
+
+    background-color: #222
+    color: $color
+    &_logo
+        width: 48px
+        height: 48px
+    &_title
+        font-size: 1.5em
+        margin: 0 .5em
+    &_signout
+        border: 1px solid $color
+        border-radius: 1em
+        font-size: 1.1em
+        justify-self: flex-end
+        margin-right: 1em
+        padding: .25em .5em
+        &:hover, &:focus
+            box-shadow: 0 0 3px 1px $color
+        &:focus
+            outline: none

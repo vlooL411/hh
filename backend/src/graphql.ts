@@ -14,7 +14,7 @@ export interface IUser {
 export interface IQuery {
     login(username: string, password: string): UserSafe | Promise<UserSafe>;
     vacancy(id: string): Vacancy | Promise<Vacancy>;
-    vacancies(): Vacancy[] | Promise<Vacancy[]>;
+    vacancies(page?: number): Vacancies | Promise<Vacancies>;
 }
 
 export interface Salary {
@@ -22,6 +22,32 @@ export interface Salary {
     from?: string;
     currency?: string;
     gross?: boolean;
+}
+
+export interface Snippet {
+    requirement?: string;
+    responsibility?: string;
+}
+
+export interface LogoUrls {
+    min?: string;
+    normal?: string;
+    original?: string;
+}
+
+export interface Employer {
+    id?: string;
+    name?: string;
+    url?: string;
+    logo_urls?: LogoUrls;
+    alternate_url?: string;
+    trusted?: boolean;
+}
+
+export interface Area {
+    id?: string;
+    url?: string;
+    name?: string;
 }
 
 export interface MetroStation {
@@ -55,9 +81,19 @@ export interface User extends IUser {
 }
 
 export interface Vacancy {
-    id?: string;
-    position?: string;
-    address?: Address;
+    id: string;
+    name: string;
+    area?: Area;
     salary?: Salary;
     description?: string;
+    snippet?: Snippet;
+    employer?: Employer;
+}
+
+export interface Vacancies {
+    per_page?: number;
+    page?: number;
+    pages?: number;
+    found?: number;
+    items?: Vacancy[];
 }

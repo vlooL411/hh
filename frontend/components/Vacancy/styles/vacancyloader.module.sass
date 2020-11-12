@@ -1,0 +1,27 @@
+@import vacancy.module
+
+.vacancyloader
+    @extend .vacancy
+    width: 100%
+    &_logo
+        @extend .vacancy_logo
+        width: 100%
+        height: 100%
+    &_title
+        width: 60%
+        height: 1.5em
+    &_salary
+        width: 40%
+        height: 1.1em
+        margin: .4em 0
+    &_employer
+        width: 30%
+        height: 1.4em
+        margin: .75em 0 .3em
+        @extend .vacancy_employer
+    &_area
+        width: 30%
+        @extend .vacancy_area
+    &_description
+        width: 85%
+        height: 400px

@@ -5,6 +5,32 @@ type Salary {
   gross: Boolean
 }
 
+type Snippet {
+  requirement: String
+  responsibility: String
+}
+
+type LogoUrls {
+  min: String
+  normal: String
+  original: String
+}
+
+type Employer {
+  id: String
+  name: String
+  url: String
+  logo_urls: LogoUrls
+  alternate_url: String
+  trusted: Boolean
+}
+
+type Area {
+  id: String
+  url: String
+  name: String
+}
+
 type MetroStation {
   station_name: String
   line_name: String

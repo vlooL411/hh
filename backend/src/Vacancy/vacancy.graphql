@@ -1,12 +1,22 @@
 type Vacancy {
-  id: ID
-  position: String
-  address: Address
+  id: ID!
+  name: String!
+  area: Area
   salary: Salary
   description: String
+  snippet: Snippet
+  employer: Employer
+}
+
+type Vacancies {
+  per_page: Int
+  page: Int
+  pages: Int
+  found: Int
+  items: [Vacancy]
 }
 
 type Query {
   vacancy(id: ID!): Vacancy
-  vacancies: [Vacancy]!
+  vacancies(page: Int): Vacancies
 }

@@ -1,0 +1,30 @@
+$border: #b4acac
+$currentBack: #796e6e
+$paddingElement: .5em
+
+.pagination
+    width: 100%
+    margin: 1em 0
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+    user-select: none
+    &_element
+        width: 5ch
+        text-align: center
+        margin: 0 .4em
+        padding: $paddingElement
+        cursor: pointer
+        &:hover
+            background-color: $border
+    &_current
+        @extend .pagination_element
+        border: 1px solid $border
+        border-top: 3px solid $border
+        padding-top: calc(#{$paddingElement} - 3px)
+    &_empty
+        width: 4ch
+    &_number
+        @extend .pagination_element
+        border: 1px solid $border

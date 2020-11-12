@@ -15,7 +15,7 @@ export type Query = {
   __typename?: 'Query';
   login?: Maybe<UserSafe>;
   vacancy?: Maybe<Vacancy>;
-  vacancies: Array<Maybe<Vacancy>>;
+  vacancies?: Maybe<Vacancies>;
 };
 
 
@@ -29,12 +29,47 @@ export type QueryVacancyArgs = {
   id: Scalars['ID'];
 };
 
+
+export type QueryVacanciesArgs = {
+  page?: Maybe<Scalars['Int']>;
+};
+
 export type Salary = {
   __typename?: 'Salary';
   to?: Maybe<Scalars['String']>;
   from?: Maybe<Scalars['String']>;
   currency?: Maybe<Scalars['String']>;
   gross?: Maybe<Scalars['Boolean']>;
+};
+
+export type Snippet = {
+  __typename?: 'Snippet';
+  requirement?: Maybe<Scalars['String']>;
+  responsibility?: Maybe<Scalars['String']>;
+};
+
+export type LogoUrls = {
+  __typename?: 'LogoUrls';
+  min?: Maybe<Scalars['String']>;
+  normal?: Maybe<Scalars['String']>;
+  original?: Maybe<Scalars['String']>;
+};
+
+export type Employer = {
+  __typename?: 'Employer';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  logo_urls?: Maybe<LogoUrls>;
+  alternate_url?: Maybe<Scalars['String']>;
+  trusted?: Maybe<Scalars['Boolean']>;
+};
+
+export type Area = {
+  __typename?: 'Area';
+  id?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type MetroStation = {
@@ -78,11 +113,22 @@ export type User = IUser & {
 
 export type Vacancy = {
   __typename?: 'Vacancy';
-  id?: Maybe<Scalars['ID']>;
-  position?: Maybe<Scalars['String']>;
-  address?: Maybe<Address>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  area?: Maybe<Area>;
   salary?: Maybe<Salary>;
   description?: Maybe<Scalars['String']>;
+  snippet?: Maybe<Snippet>;
+  employer?: Maybe<Employer>;
+};
+
+export type Vacancies = {
+  __typename?: 'Vacancies';
+  per_page?: Maybe<Scalars['Int']>;
+  page?: Maybe<Scalars['Int']>;
+  pages?: Maybe<Scalars['Int']>;
+  found?: Maybe<Scalars['Int']>;
+  items?: Maybe<Array<Maybe<Vacancy>>>;
 };
 
 export type LoginQueryVariables = Exact<{
@@ -101,14 +147,32 @@ export type LoginQuery = (
 
 export type VacancyInfoFragment = (
   { __typename?: 'Vacancy' }
-  & Pick<Vacancy, 'position' | 'description'>
-  & { address?: Maybe<(
-    { __typename?: 'Address' }
-    & AddressInfoFragment
+  & Pick<Vacancy, 'id' | 'name'>
+  & { area?: Maybe<(
+    { __typename?: 'Area' }
+    & AreaInfoFragment
   )>, salary?: Maybe<(
     { __typename?: 'Salary' }
     & SalaryInfoFragment
+  )>, employer?: Maybe<(
+    { __typename?: 'Employer' }
+    & EmployerInfoFragment
   )> }
+);
+
+export type VacancyInfoDescriptionFragment = (
+  { __typename?: 'Vacancy' }
+  & Pick<Vacancy, 'description'>
+  & VacancyInfoFragment
+);
+
+export type VacancyInfoSnippetFragment = (
+  { __typename?: 'Vacancy' }
+  & { snippet?: Maybe<(
+    { __typename?: 'Snippet' }
+    & SnippetInfoFragment
+  )> }
+  & VacancyInfoFragment
 );
 
 export type VacancyQueryVariables = Exact<{
@@ -121,25 +185,55 @@ export type VacancyQuery = (
   & { vacancy?: Maybe<(
     { __typename?: 'Vacancy' }
     & Pick<Vacancy, 'id'>
-    & VacancyInfoFragment
+    & VacancyInfoDescriptionFragment
   )> }
 );
 
-export type VacanciesQueryVariables = Exact<{ [key: string]: never; }>;
+export type VacanciesQueryVariables = Exact<{
+  page?: Maybe<Scalars['Int']>;
+}>;
 
 
 export type VacanciesQuery = (
   { __typename?: 'Query' }
-  & { vacancies: Array<Maybe<(
-    { __typename?: 'Vacancy' }
-    & Pick<Vacancy, 'id'>
-    & VacancyInfoFragment
-  )>> }
+  & { vacancies?: Maybe<(
+    { __typename?: 'Vacancies' }
+    & Pick<Vacancies, 'per_page' | 'page' | 'pages' | 'found'>
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Vacancy' }
+      & Pick<Vacancy, 'id'>
+      & VacancyInfoSnippetFragment
+    )>>> }
+  )> }
 );
 
 export type SalaryInfoFragment = (
   { __typename?: 'Salary' }
   & Pick<Salary, 'to' | 'from' | 'currency' | 'gross'>
+);
+
+export type SnippetInfoFragment = (
+  { __typename?: 'Snippet' }
+  & Pick<Snippet, 'requirement' | 'responsibility'>
+);
+
+export type AreaInfoFragment = (
+  { __typename?: 'Area' }
+  & Pick<Area, 'id' | 'url' | 'name'>
+);
+
+export type LogoUrlsInfoFragment = (
+  { __typename?: 'LogoUrls' }
+  & Pick<LogoUrls, 'min' | 'normal' | 'original'>
+);
+
+export type EmployerInfoFragment = (
+  { __typename?: 'Employer' }
+  & Pick<Employer, 'id' | 'name' | 'url' | 'alternate_url' | 'trusted'>
+  & { logo_urls?: Maybe<(
+    { __typename?: 'LogoUrls' }
+    & LogoUrlsInfoFragment
+  )> }
 );
 
 export type MetroStationInfoFragment = (
@@ -156,6 +250,78 @@ export type AddressInfoFragment = (
   )>>> }
 );
 
+export const AreaInfoFragmentDoc = gql`
+    fragment AreaInfo on Area {
+  id
+  url
+  name
+}
+    `;
+export const SalaryInfoFragmentDoc = gql`
+    fragment SalaryInfo on Salary {
+  to
+  from
+  currency
+  gross
+}
+    `;
+export const LogoUrlsInfoFragmentDoc = gql`
+    fragment LogoUrlsInfo on LogoUrls {
+  min
+  normal
+  original
+}
+    `;
+export const EmployerInfoFragmentDoc = gql`
+    fragment EmployerInfo on Employer {
+  id
+  name
+  url
+  logo_urls {
+    ...LogoUrlsInfo
+  }
+  alternate_url
+  trusted
+}
+    ${LogoUrlsInfoFragmentDoc}`;
+export const VacancyInfoFragmentDoc = gql`
+    fragment VacancyInfo on Vacancy {
+  id
+  name
+  area {
+    ...AreaInfo
+  }
+  salary {
+    ...SalaryInfo
+  }
+  employer {
+    ...EmployerInfo
+  }
+}
+    ${AreaInfoFragmentDoc}
+${SalaryInfoFragmentDoc}
+${EmployerInfoFragmentDoc}`;
+export const VacancyInfoDescriptionFragmentDoc = gql`
+    fragment VacancyInfoDescription on Vacancy {
+  ...VacancyInfo
+  description
+}
+    ${VacancyInfoFragmentDoc}`;
+export const SnippetInfoFragmentDoc = gql`
+    fragment SnippetInfo on Snippet {
+  requirement
+  responsibility
+}
+    `;
+export const VacancyInfoSnippetFragmentDoc = gql`
+    fragment VacancyInfoSnippet on Vacancy {
+  ...VacancyInfo
+  snippet {
+    ...SnippetInfo
+  }
+}
+    ${VacancyInfoFragmentDoc}
+${SnippetInfoFragmentDoc}`;
 export const MetroStationInfoFragmentDoc = gql`
     fragment MetroStationInfo on MetroStation {
   station_name
@@ -179,27 +345,6 @@ export const AddressInfoFragmentDoc = gql`
   }
 }
     ${MetroStationInfoFragmentDoc}`;
-export const SalaryInfoFragmentDoc = gql`
-    fragment SalaryInfo on Salary {
-  to
-  from
-  currency
-  gross
-}
-    `;
-export const VacancyInfoFragmentDoc = gql`
-    fragment VacancyInfo on Vacancy {
-  position
-  address {
-    ...AddressInfo
-  }
-  salary {
-    ...SalaryInfo
-  }
-  description
-}
-    ${AddressInfoFragmentDoc}
-${SalaryInfoFragmentDoc}`;
 export const LoginDocument = gql`
     query Login($username: String!, $password: String!) {
   login(username: $username, password: $password) {
@@ -239,10 +384,10 @@ export const VacancyDocument = gql`
     query Vacancy($id: ID!) {
   vacancy(id: $id) {
     id
-    ...VacancyInfo
+    ...VacancyInfoDescription
   }
 }
-    ${VacancyInfoFragmentDoc}`;
+    ${VacancyInfoDescriptionFragmentDoc}`;
 
 /**
  * __useVacancyQuery__
@@ -270,13 +415,19 @@ export type VacancyQueryHookResult = ReturnType<typeof useVacancyQuery>;
 export type VacancyLazyQueryHookResult = ReturnType<typeof useVacancyLazyQuery>;
 export type VacancyQueryResult = Apollo.QueryResult<VacancyQuery, VacancyQueryVariables>;
 export const VacanciesDocument = gql`
-    query Vacancies {
-  vacancies {
-    id
-    ...VacancyInfo
+    query Vacancies($page: Int) {
+  vacancies(page: $page) {
+    per_page
+    page
+    pages
+    found
+    items {
+      id
+      ...VacancyInfoSnippet
+    }
   }
 }
-    ${VacancyInfoFragmentDoc}`;
+    ${VacancyInfoSnippetFragmentDoc}`;
 
 /**
  * __useVacanciesQuery__
@@ -290,6 +441,7 @@ export const VacanciesDocument = gql`
  * @example
  * const { data, loading, error } = useVacanciesQuery({
  *   variables: {
+ *      page: // value for 'page'
  *   },
  * });
  */
