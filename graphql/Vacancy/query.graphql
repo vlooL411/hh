@@ -5,8 +5,8 @@ query Vacancy($id: ID!) {
   }
 }
 
-query Vacancies($page: Int) {
-  vacancies(page: $page) {
+query Vacancies($page: Int, $input: FilterVacancy) {
+  vacancies(page: $page, input: $input) {
     per_page
     page
     pages

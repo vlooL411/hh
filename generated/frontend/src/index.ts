@@ -32,6 +32,7 @@ export type QueryVacancyArgs = {
 
 export type QueryVacanciesArgs = {
   page?: Maybe<Scalars['Int']>;
+  input?: Maybe<FilterVacancy>;
 };
 
 export type Salary = {
@@ -131,6 +132,12 @@ export type Vacancies = {
   items?: Maybe<Array<Maybe<Vacancy>>>;
 };
 
+export type FilterVacancy = {
+  name?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['String']>;
+};
+
 export type LoginQueryVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -191,6 +198,7 @@ export type VacancyQuery = (
 
 export type VacanciesQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
+  input?: Maybe<FilterVacancy>;
 }>;
 
 
@@ -415,8 +423,8 @@ export type VacancyQueryHookResult = ReturnType<typeof useVacancyQuery>;
 export type VacancyLazyQueryHookResult = ReturnType<typeof useVacancyLazyQuery>;
 export type VacancyQueryResult = Apollo.QueryResult<VacancyQuery, VacancyQueryVariables>;
 export const VacanciesDocument = gql`
-    query Vacancies($page: Int) {
-  vacancies(page: $page) {
+    query Vacancies($page: Int, $input: FilterVacancy) {
+  vacancies(page: $page, input: $input) {
     per_page
     page
     pages
@@ -442,6 +450,7 @@ export const VacanciesDocument = gql`
  * const { data, loading, error } = useVacanciesQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      input: // value for 'input'
  *   },
  * });
  */

@@ -6,6 +6,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export interface FilterVacancy {
+    name?: string;
+    city?: string;
+    from?: string;
+}
+
 export interface IUser {
     userId: string;
     username: string;
@@ -14,7 +20,7 @@ export interface IUser {
 export interface IQuery {
     login(username: string, password: string): UserSafe | Promise<UserSafe>;
     vacancy(id: string): Vacancy | Promise<Vacancy>;
-    vacancies(page?: number): Vacancies | Promise<Vacancies>;
+    vacancies(page?: number, input?: FilterVacancy): Vacancies | Promise<Vacancies>;
 }
 
 export interface Salary {

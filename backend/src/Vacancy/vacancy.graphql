@@ -16,7 +16,13 @@ type Vacancies {
   items: [Vacancy]
 }
 
+input FilterVacancy {
+  name: String
+  city: String
+  from: String
+}
+
 type Query {
   vacancy(id: ID!): Vacancy
-  vacancies(page: Int): Vacancies
+  vacancies(page: Int, input: FilterVacancy): Vacancies
 }

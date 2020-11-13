@@ -1,6 +1,6 @@
 import { Args, ID, Query, Resolver } from '@nestjs/graphql'
 import { Observable } from 'rxjs'
-import { Vacancies, Vacancy } from 'src/graphql'
+import { FilterVacancy, Vacancies, Vacancy } from 'src/graphql'
 
 import VacancyService from './service'
 
@@ -13,7 +13,9 @@ export default class VacancyResolver {
         return this.vacancyService.getVacancyById(id);
     }
     @Query()
-    vacancies(@Args('page') page: number): Observable<Vacancies> {
-        return this.vacancyService.getAllVacancies(page);
+    vacancies(
+        @Args('page') page: number,
+        @Args('input') input: FilterVacancy): Observable<Vacancies> {
+        return this.vacancyService.getAllVacancies(page, input);
     }
 }

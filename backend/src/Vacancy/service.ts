@@ -1,7 +1,7 @@
 import { HttpService, Injectable } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { Vacancies, Vacancy } from 'src/graphql'
+import { FilterVacancy, Vacancies, Vacancy } from 'src/graphql'
 
 import { Model } from './model'
 
@@ -12,28 +12,37 @@ export default class VacancyService {
     constructor(private http: HttpService) { }
 
     private toVacancy(vacancy: Model.Vacancy): Vacancy {
-        const { employer } = vacancy
+        const employer = vacancy?.employer
+        const logo_urls = employer?.logo_urls
 
         return {
             ...vacancy,
             employer: {
                 ...employer,
                 logo_urls: {
-                    min: employer.logo_urls[90],
-                    normal: employer.logo_urls[240],
-                    original: employer.logo_urls.original
+                    min: logo_urls[90],
+                    normal: logo_urls[240],
+                    original: logo_urls.original
                 }
             }
         };
     }
 
-    getAllVacancies = (page: number): Observable<Vacancies> =>
-        this.http.
-            get(`${this.apiUrl}vacancies?page=${page}`).
+    getAllVacancies(page: number, input: FilterVacancy): Observable<Vacancies> {
+        let GET: string = `?page=${page ?? 0}`
+        const from = input?.from
+        if (from)
+            GET += `&salary=${+from <= 0 ? 1 : from}`
+        if (input?.city || input?.name)
+            GET += `&text=${input?.city ?? ''}+${input?.name ?? ''}`
+
+        return this.http.
+            get(`${this.apiUrl}vacancies${encodeURI(GET)}`).
             pipe(map(({ data }) => data))
+    }
 
     getVacancyById = (id: number): Observable<Vacancy> =>
         this.http.
-            get(`${this.apiUrl}vacancies/${id}`).
+            get(`${this.apiUrl}vacancies\\${id}`).
             pipe(map(({ data }) => this.toVacancy(data)))
 }

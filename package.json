@@ -10,8 +10,7 @@
     "build:dist": "lerna run build:dist",
     "build:full": "yarn build:dist && yarn build",
     "jest": "lerna run jest",
-    "generated": "yarn workspace @hh/generated generate",
-    "generated:watch": "yarn workspace @hh/generated generate:watch"
+    "generated": "yarn workspace @hh/generated generate"
   },
   "devDependencies": {
     "lerna": "^3.22.1"

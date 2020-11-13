@@ -1,0 +1,18 @@
+
+.filter
+    width: 100%
+    display: flex
+    input
+        max-width: 200px
+        border: 1px solid #333
+        border-radius: 1em
+        padding: .15em .65em
+        margin: 0 1em
+        &:focus
+            outline: none
+            box-shadow: 0 0 4px 1px #333
+    @media screen and ( max-width: 650px )
+        flex-wrap: wrap
+        input
+            margin-top: .5em
+            margin-right: .25em
