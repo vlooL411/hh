@@ -1,28 +1,28 @@
 type Vacancy {
-  id: ID!
-  name: String!
-  area: Area
-  salary: Salary
-  description: String
-  snippet: Snippet
-  employer: Employer
+	id: ID!
+	name: String!
+	area: Area
+	salary: Salary
+	description: String
+	snippet: Snippet
+	employer: Employer
 }
 
 type Vacancies {
-  per_page: Int
-  page: Int
-  pages: Int
-  found: Int
-  items: [Vacancy]
+	per_page: Int
+	page: Int
+	pages: Int
+	found: Int
+	items: [Vacancy]
 }
 
 input FilterVacancy {
-  name: String
-  city: String
-  from: String
+	name: String
+	city: String
+	from: String
 }
 
 type Query {
-  vacancy(id: ID!): Vacancy
-  vacancies(page: Int, input: FilterVacancy): Vacancies
+	vacancy(id: ID!): Vacancy
+	vacancies(page: Int, input: FilterVacancy): Vacancies
 }

@@ -1,25 +1,25 @@
 fragment VacancyInfo on Vacancy {
-  id
-  name
-  area {
-    ...AreaInfo
-  }
-  salary {
-    ...SalaryInfo
-  }
-  employer {
-    ...EmployerInfo
-  }
+	id
+	name
+	area {
+		...AreaInfo
+	}
+	salary {
+		...SalaryInfo
+	}
+	employer {
+		...EmployerInfo
+	}
 }
 
 fragment VacancyInfoDescription on Vacancy {
-  ...VacancyInfo
-  description
+	...VacancyInfo
+	description
 }
 
 fragment VacancyInfoSnippet on Vacancy {
-  ...VacancyInfo
-  snippet {
-    ...SnippetInfo
-  }
+	...VacancyInfo
+	snippet {
+		...SnippetInfo
+	}
 }

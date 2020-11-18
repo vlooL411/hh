@@ -1,7 +1,5 @@
-import { InMemoryCacheConfig } from '@apollo/client'
+import { InMemoryCacheConfig } from '@apollo/client';
 
 export const CacheConfig: InMemoryCacheConfig = {
-  typePolicies: {
-   
-  }
+	typePolicies: {},
 };

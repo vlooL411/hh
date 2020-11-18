@@ -1,55 +1,55 @@
 fragment SalaryInfo on Salary {
-  to
-  from
-  currency
-  gross
+	to
+	from
+	currency
+	gross
 }
 
 fragment SnippetInfo on Snippet {
-  requirement
-  responsibility
+	requirement
+	responsibility
 }
 
 fragment AreaInfo on Area {
-  id
-  url
-  name
+	id
+	url
+	name
 }
 
 fragment LogoUrlsInfo on LogoUrls {
-  min
-  normal
-  original
+	min
+	normal
+	original
 }
 
 fragment EmployerInfo on Employer {
-  id
-  name
-  url
-  logo_urls {
-    ...LogoUrlsInfo
-  }
-  alternate_url
-  trusted
+	id
+	name
+	url
+	logo_urls {
+		...LogoUrlsInfo
+	}
+	alternate_url
+	trusted
 }
 
 fragment MetroStationInfo on MetroStation {
-  station_name
-  line_name
-  station_id
-  line_id
-  lat
-  lng
+	station_name
+	line_name
+	station_id
+	line_id
+	lat
+	lng
 }
 
 fragment AddressInfo on Address {
-  city
-  street
-  building
-  description
-  lat
-  lng
-  metro_stations {
-    ...MetroStationInfo
-  }
+	city
+	street
+	building
+	description
+	lat
+	lng
+	metro_stations {
+		...MetroStationInfo
+	}
 }

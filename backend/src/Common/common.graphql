@@ -1,51 +1,51 @@
 type Salary {
-  to: String
-  from: String
-  currency: String
-  gross: Boolean
+	to: String
+	from: String
+	currency: String
+	gross: Boolean
 }
 
 type Snippet {
-  requirement: String
-  responsibility: String
+	requirement: String
+	responsibility: String
 }
 
 type LogoUrls {
-  min: String
-  normal: String
-  original: String
+	min: String
+	normal: String
+	original: String
 }
 
 type Employer {
-  id: String
-  name: String
-  url: String
-  logo_urls: LogoUrls
-  alternate_url: String
-  trusted: Boolean
+	id: String
+	name: String
+	url: String
+	logo_urls: LogoUrls
+	alternate_url: String
+	trusted: Boolean
 }
 
 type Area {
-  id: String
-  url: String
-  name: String
+	id: String
+	url: String
+	name: String
 }
 
 type MetroStation {
-  station_name: String
-  line_name: String
-  station_id: String
-  line_id: String
-  lat: Float
-  lng: Float
+	station_name: String
+	line_name: String
+	station_id: String
+	line_id: String
+	lat: Float
+	lng: Float
 }
 
 type Address {
-  city: String
-  street: String
-  building: String
-  description: String
-  lat: Float
-  lng: Float
-  metro_stations: [MetroStation]
+	city: String
+	street: String
+	building: String
+	description: String
+	lat: Float
+	lng: Float
+	metro_stations: [MetroStation]
 }

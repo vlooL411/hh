@@ -1,19 +1,19 @@
 query Vacancy($id: ID!) {
-  vacancy(id: $id) {
-    id
-    ...VacancyInfoDescription
-  }
+	vacancy(id: $id) {
+		id
+		...VacancyInfoDescription
+	}
 }
 
 query Vacancies($page: Int, $input: FilterVacancy) {
-  vacancies(page: $page, input: $input) {
-    per_page
-    page
-    pages
-    found
-    items {
-      id
-      ...VacancyInfoSnippet
-    }
-  }
+	vacancies(page: $page, input: $input) {
+		per_page
+		page
+		pages
+		found
+		items {
+			id
+			...VacancyInfoSnippet
+		}
+	}
 }

@@ -4,8 +4,8 @@ import VacancyService from './service';
 import VacancyResolver from './resolver';
 
 @Module({
-    imports: [HttpModule],
-    providers: [VacancyService, VacancyResolver],
-    exports: [VacancyService],
+	imports: [HttpModule],
+	providers: [VacancyService, VacancyResolver],
+	exports: [VacancyService],
 })
-export default class LaunchModule { }
+export default class LaunchModule {}
