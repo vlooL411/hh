@@ -1,4 +1,4 @@
-import { FilterVacancy } from '@generated/frontend';
+import { FilterVacancy } from '@frontend/types';
 import { useRouter } from 'next/router';
 import { ReactElement, useRef } from 'react';
 

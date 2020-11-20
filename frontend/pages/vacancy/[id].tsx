@@ -1,6 +1,6 @@
-import { useVacancyQuery } from '@generated/frontend';
 import Header from 'components/Header';
 import Vacancy, { VacancyLoader } from 'components/Vacancy';
+import { useVacancyQuery } from '@frontend/types';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 

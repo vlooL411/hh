@@ -6,6 +6,10 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum TokenType {
+    authorization = "authorization"
+}
+
 export interface FilterVacancy {
     name?: string;
     city?: string;
@@ -13,14 +17,24 @@ export interface FilterVacancy {
 }
 
 export interface IUser {
-    userId: string;
-    username: string;
+    id?: string;
+    username?: string;
+}
+
+export interface Authorization {
+    accessToken?: Token;
+    refreshToken?: Token;
 }
 
 export interface IQuery {
-    login(username: string, password: string): UserSafe | Promise<UserSafe>;
+    Login(username?: string, password?: string): Authorization | Promise<Authorization>;
+    Refresh(refreshToken?: Token): Authorization | Promise<Authorization>;
     vacancy(id: string): Vacancy | Promise<Vacancy>;
     vacancies(page?: number, input?: FilterVacancy): Vacancies | Promise<Vacancies>;
+}
+
+export interface IMutation {
+    Register(username?: string, password?: string): UserSafe | Promise<UserSafe>;
 }
 
 export interface Salary {
@@ -76,14 +90,14 @@ export interface Address {
 }
 
 export interface UserSafe extends IUser {
-    userId: string;
-    username: string;
+    id?: string;
+    username?: string;
 }
 
 export interface User extends IUser {
-    userId: string;
-    username: string;
-    password: string;
+    id?: string;
+    username?: string;
+    password?: string;
 }
 
 export interface Vacancy {
@@ -103,3 +117,5 @@ export interface Vacancies {
     found?: number;
     items?: Vacancy[];
 }
+
+export type Token = any;

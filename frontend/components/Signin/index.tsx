@@ -1,6 +1,6 @@
-import { useLoginLazyQuery } from '@generated/frontend';
+import { useLoginLazyQuery } from '@frontend/types';
 import { ReactElement, useRef } from 'react';
-import { SessionContext } from 'providers/Session';
+import { AuthContext } from 'providers/Auth';
 
 import style from './signin.module.sass';
 
@@ -12,7 +12,7 @@ const Signin = (): ReactElement => {
 		signin_description,
 		signin_button,
 	} = style;
-	const [loginQuery, { data }] = useLoginLazyQuery({
+	const [loginQuery, { data, error }] = useLoginLazyQuery({
 		fetchPolicy: 'network-only',
 	});
 
@@ -30,9 +30,9 @@ const Signin = (): ReactElement => {
 	};
 
 	return (
-		<SessionContext.Consumer>
-			{({ user, setUser }) => {
-				if (data?.login && user != data.login) setUser(data.login);
+		<AuthContext.Consumer>
+			{({ setAuth }) => {
+				if (data?.Login) setAuth(data?.Login);
 
 				return (
 					<div className={signin}>
@@ -57,7 +57,7 @@ const Signin = (): ReactElement => {
 					</div>
 				);
 			}}
-		</SessionContext.Consumer>
+		</AuthContext.Consumer>
 	);
 };
 

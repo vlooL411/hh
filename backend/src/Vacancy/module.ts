@@ -1,11 +1,11 @@
-import { Module, HttpModule } from '@nestjs/common';
+import { HttpModule, Module } from '@nestjs/common';
+import AuthModule from 'src/auth/module';
 
-import VacancyService from './service';
 import VacancyResolver from './resolver';
+import VacancyService from './service';
 
 @Module({
-	imports: [HttpModule],
+	imports: [HttpModule, AuthModule],
 	providers: [VacancyService, VacancyResolver],
-	exports: [VacancyService],
 })
-export default class LaunchModule {}
+export default class VacancyModule {}

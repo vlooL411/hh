@@ -1,15 +1,15 @@
 interface IUser {
-	userId: ID!
-	username: String!
+	id: ID
+	username: String
 }
 
 type UserSafe implements IUser {
-	userId: ID!
-	username: String!
+	id: ID
+	username: String
 }
 
 type User implements IUser {
-	userId: ID!
-	username: String!
-	password: String!
+	id: ID
+	username: String
+	password: String
 }

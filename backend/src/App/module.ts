@@ -3,22 +3,27 @@ import VacancyModule from 'src/vacancy/module';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-
-const { ORIGIN: origin } = process.env;
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
 	imports: [
+		ConfigModule.forRoot({ envFilePath: ['.env', '.env.local'] }),
 		GraphQLModule.forRoot({
 			typePaths: ['./**/*.graphql'],
 			definitions: { path: join(process.cwd(), 'src/graphql.ts') },
-			context: ({ req }) => ({ headers: req.headers }),
+			context: ({ req }) => ({ headers: req?.headers }),
+			playground: {
+				settings: {
+					'request.credentials': 'include',
+				},
+			},
 			cors: {
 				credentials: true,
-				origin,
+				origin: process.env.ORIGIN,
 			},
 		}),
-		VacancyModule,
 		AuthModule,
+		VacancyModule,
 	],
 })
 export default class AppModule {}

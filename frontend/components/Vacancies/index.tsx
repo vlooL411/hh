@@ -1,5 +1,5 @@
 import Pagination from 'components/Pagination';
-import { FilterVacancy, useVacanciesLazyQuery } from '@generated/frontend';
+import { FilterVacancy, useVacanciesLazyQuery } from '@frontend/types';
 import { ReactElement, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 
@@ -17,7 +17,7 @@ const Vacancies = ({ page }: Props): ReactElement => {
 	});
 
 	const router = useRouter();
-	const query = { page, ...router?.query };
+	const { page: _, query } = router?.query;
 
 	useEffect(() => {
 		vacanciesQuery({ variables: { page } });
@@ -39,7 +39,12 @@ const Vacancies = ({ page }: Props): ReactElement => {
 				: data?.vacancies.items.map(vacancy => (
 						<Vacancy {...vacancy} key={vacancy.id} />
 				  ))}
-			<Pagination query={query} current={page} length={40} maxLength={8} />
+			<Pagination
+				query={query as string}
+				current={page}
+				length={40}
+				maxLength={8}
+			/>
 		</div>
 	);
 };

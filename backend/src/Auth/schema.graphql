@@ -1,0 +1,19 @@
+scalar Token
+
+enum TokenType {
+	authorization
+}
+
+type Authorization {
+	accessToken: Token
+	refreshToken: Token
+}
+
+type Query {
+	Login(username: String, password: String): Authorization
+	Refresh(refreshToken: Token): Authorization
+}
+
+type Mutation {
+	Register(username: String, password: String): UserSafe
+}

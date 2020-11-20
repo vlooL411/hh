@@ -1,10 +1,11 @@
 const withSASS = require('@zeit/next-sass')();
 
+const { env } = process;
+
 module.exports = {
 	withSASS,
 	env: {
-		PORT: 3000,
-		HOST: 'http://localhost:3000',
-		HOST_GRAPHQL: 'http://localhost:4000/graphql',
+		HOST: env.HOST,
+		HOST_GRAPHQL: env.HOST_GRAPHQL,
 	},
 };

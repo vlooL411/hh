@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ReactElement } from 'react';
-import { Vacancy as TVacancy } from '@generated/frontend';
+import { Vacancy as TVacancy } from '@frontend/types';
 import { salaryProcess } from 'components/Common/salary';
 
 import style from './styles/vacancy.module.sass';

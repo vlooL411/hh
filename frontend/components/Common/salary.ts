@@ -1,4 +1,4 @@
-import { Salary } from '@generated/frontend';
+import { Salary } from '@frontend/types';
 
 export const salaryProcess = (salary: Salary) => {
 	let sal: string = '';

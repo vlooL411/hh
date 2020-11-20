@@ -1,25 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/graphql';
+import { User, UserSafe } from 'src/graphql';
 
 @Injectable()
 export default class UsersService {
-	private readonly users: User[];
+	private readonly users: User[] = [
+		{
+			id: '1',
+			username: 'admin',
+			password: 'admin',
+		},
+		{
+			id: '2',
+			username: 'guest',
+			password: 'guest',
+		},
+	];
 
-	constructor() {
-		this.users = [
-			{
-				userId: '1',
-				username: 'admin',
-				password: 'admin',
-			},
-			{
-				userId: '2',
-				username: 'guest',
-				password: 'guest',
-			},
-		];
+	findOne = (username: string): User | undefined =>
+		this.users.find(user => user.username === username);
+
+	exist = (username: string): boolean => this.findOne(username) !== undefined;
+
+	create(username: string, password: string): UserSafe | null {
+		const isExist = this.exist(username);
+		if (isExist) return null;
+
+		const user: UserSafe = {
+			id: (Math.random() * 10000).toFixed(0),
+			username,
+		};
+		this.users.push({ ...user, password });
+		return user;
 	}
 
-	findOne = async (username: string): Promise<User | undefined> =>
-		this.users.find(user => user.username === username);
+	getUsers = (): UserSafe[] => this.users.map(({ password, ...user }) => user);
 }

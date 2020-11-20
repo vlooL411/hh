@@ -1,32 +1,27 @@
 {
-	"version": "0.1.1",
+	"version": "0.2.1",
 	"private": true,
 	"license": "MIT",
 	"scripts": {
-		"prevbuild": "yarn && npm run build:dist",
+		"prevbuild": "yarn",
 		"frontend:dev": "yarn workspace @hh/frontend dev",
 		"backend:dev": "yarn workspace @hh/backend dev",
 		"build": "lerna run build",
-		"build:dist": "lerna run build:dist",
-		"build:full": "yarn build:dist && yarn build",
-		"jest": "lerna run jest",
-		"generated": "yarn workspace @hh/generated generate",
 		"prettier": "npx prettier --ignore-path .gitignore --write .",
 		"prettier:check": "prettier --ignore-path .gitignore --check ."
 	},
 	"devDependencies": {
 		"lerna": "^3.22.1",
-		"prettier": "^2.1.2"
+		"prettier": "^2.2.0"
 	},
 	"resolutions": {
-		"typescript": "^4.0.5",
-		"@apollo/client": "^3.2.5",
-		"@types/node": "^14.14.6"
+		"typescript": "^4.1.2",
+		"@apollo/client": "^3.2.7",
+		"@types/node": "^14.14.9"
 	},
 	"workspaces": [
 		"frontend",
-		"backend",
-		"generated",
-		"generated/**/*"
+		"frontend/**/*",
+		"backend"
 	]
 }

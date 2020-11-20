@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { SessionContext } from 'providers/Session';
+import { AuthContext } from 'providers/Auth';
 
 type Props = {
 	className?: string;
@@ -8,13 +8,13 @@ type Props = {
 
 const Signout = ({ children, className = '' }: Props): ReactElement => {
 	return (
-		<SessionContext.Consumer>
-			{({ remUser }) => (
-				<button className={className} onClick={remUser}>
+		<AuthContext.Consumer>
+			{({ remAuth }) => (
+				<button className={className} onClick={remAuth}>
 					{children}
 				</button>
 			)}
-		</SessionContext.Consumer>
+		</AuthContext.Consumer>
 	);
 };
 

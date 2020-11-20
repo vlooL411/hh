@@ -1,4 +1,3 @@
-import { Vacancy as TVacancy } from '@generated/frontend';
 import LoaderText from 'components/Loader/LoaderText';
 import { ReactElement } from 'react';
 
