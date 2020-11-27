@@ -1,10 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Model {
 	export type Vacancies = {
 		per_page: number;
 		page: number;
 		pages: number;
 		found: number;
-		clusters: any;
+		clusters;
 		Items: Vacancy[];
 	};
 

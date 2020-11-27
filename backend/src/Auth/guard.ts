@@ -10,14 +10,14 @@ import { AuthGuard as authGuard } from '@nestjs/passport';
 import { Token, TokenType } from 'src/graphql';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { config } from './config';
+import AuthConfig from './config';
 
 @Injectable()
 class GqlGuard extends authGuard('jwt') {
 	constructor(private readonly jwtService: JwtService) {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			secretOrKey: config().accessToken.secret,
+			secretOrKey: AuthConfig().accessToken.secret,
 		});
 	}
 

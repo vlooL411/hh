@@ -4,15 +4,23 @@
 	"license": "MIT",
 	"scripts": {
 		"prevbuild": "yarn",
+		"prevcommit": "yarn prettier && yarn lint",
 		"frontend:dev": "yarn workspace @hh/frontend dev",
 		"backend:dev": "yarn workspace @hh/backend dev",
 		"build": "lerna run build",
 		"prettier": "npx prettier --ignore-path .gitignore --write .",
-		"prettier:check": "prettier --ignore-path .gitignore --check ."
+		"prettier:check": "prettier --ignore-path .gitignore --check .",
+		"lint": "eslint --ignore-path .gitignore **/*.{js,ts,tsx} --quiet --fix"
 	},
 	"devDependencies": {
 		"lerna": "^3.22.1",
-		"prettier": "^2.2.0"
+		"prettier": "^2.2.0",
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"eslint": "^7.14.0",
+		"@typescript-eslint/parser": "^4.8.1",
+		"@typescript-eslint/eslint-plugin": "^4.8.1",
+		"eslint-plugin-react": "^7.21.5"
 	},
 	"resolutions": {
 		"typescript": "^4.1.2",

@@ -8,7 +8,7 @@ type Props = {
 	onChange?: (filter: FilterVacancy) => void;
 };
 
-const Filter = ({ onChange = () => {} }: Props): ReactElement => {
+const Filter = ({ onChange = () => null }: Props): ReactElement => {
 	const { filter } = style;
 	const router = useRouter();
 

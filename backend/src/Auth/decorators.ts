@@ -7,11 +7,11 @@ import { Token, TokenType, UserSafe } from 'src/graphql';
 import { verify } from 'jsonwebtoken';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { config } from './config';
+import AuthConfig from './config';
 
 const validate = (token: Token): UserSafe => {
 	try {
-		return verify(token, config().accessToken.secret) as object;
+		return verify(token, AuthConfig().accessToken.secret) as UserSafe;
 	} catch {
 		throw new UnauthorizedException();
 	}

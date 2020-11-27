@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Token } from 'src/graphql';
 import { JwtService } from '@nestjs/jwt';
 
-import { config } from './config';
+import AuthConfig from './config';
 
 @Injectable()
 export default class AuthService {
@@ -27,7 +27,7 @@ export default class AuthService {
 	private createAuthorization(user: UserSafe): Authorization {
 		if (!user) throw new Error('User data is empty');
 		const accessToken = this.jwtService.sign(user);
-		const refreshToken = this.jwtService.sign(user, config().refreshToken);
+		const refreshToken = this.jwtService.sign(user, AuthConfig().refreshToken);
 
 		return { accessToken, refreshToken };
 	}
@@ -47,7 +47,7 @@ export default class AuthService {
 		try {
 			const refresh = this.jwtService.verify(
 				refreshToken,
-				config().refreshToken,
+				AuthConfig().refreshToken,
 			);
 
 			const { iat, exp, ...user } = refresh;

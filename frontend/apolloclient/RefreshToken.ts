@@ -30,9 +30,9 @@ const RefreshToken = (
 	refreshToken: string,
 	operation: Operation,
 	forward: NextLink,
-) =>
+): Observable<unknown> =>
 	fromPromise<Authorization>(query(refreshToken)).flatMap(data => {
-		if (!data) return new Observable(() => {});
+		if (!data) return new Observable(() => null);
 
 		const oldHeaders = operation.getContext()?.headers;
 

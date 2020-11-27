@@ -7,7 +7,7 @@
 		"generate:watch": "graphql-codegen -w"
 	},
 	"dependencies": {
-		"@apollo/client": "file:../.../../@apollo/client"
+		"@apollo/client": "file:../../@apollo/client"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^1.19.2",

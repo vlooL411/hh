@@ -5,12 +5,12 @@ import { JwtModule } from '@nestjs/jwt';
 
 import AuthResolver from './resolver';
 import AuthService from './service';
-import { config } from './config';
+import AuthConfig from './config';
 
 @Module({
 	imports: [
 		PassportModule.register({ defaultStrategy: 'jwt' }),
-		JwtModule.registerAsync({ useFactory: () => config().accessToken }),
+		JwtModule.registerAsync({ useFactory: () => AuthConfig().accessToken }),
 		UsersModule,
 	],
 	providers: [AuthService, AuthResolver],

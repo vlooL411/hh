@@ -29,7 +29,7 @@ export default class VacancyService {
 	}
 
 	getAllVacancies(page: number, input: FilterVacancy): Observable<Vacancies> {
-		let GET: string = `?page=${page ?? 0}`;
+		let GET = `?page=${page ?? 0}`;
 		const from = input?.from;
 		if (from) GET += `&salary=${+from <= 0 ? 1 : from}`;
 		if (input?.city || input?.name)
